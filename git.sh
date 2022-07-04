@@ -1,8 +1,12 @@
-#!/bin/bash
-
-GIT=`which git`
-REPO_DIR=/home/asus/Myrepository
-cd ${REPO_DIR}
-${GIT} add --all .
-${GIT} commit -m "Test commit"
-${GIT} push -u origin master  
+echo "Enter your message"
+read message
+git add .
+git commit -m"${message}"
+if [ -n "$(git status - porcelain)" ];
+then
+ echo "IT IS CLEAN"
+else
+ git status
+ echo "Pushing data to remote server!!!"
+ git push -u origin master
+fi
